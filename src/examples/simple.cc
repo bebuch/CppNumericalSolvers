@@ -3,13 +3,13 @@
 #include <iostream>
 #include <limits>
 
-#include "include/cppoptlib/function.h"
-#include "include/cppoptlib/solver/bfgs.h"
-#include "include/cppoptlib/solver/conjugated_gradient_descent.h"
-#include "include/cppoptlib/solver/gradient_descent.h"
-#include "include/cppoptlib/solver/lbfgs.h"
-#include "include/cppoptlib/solver/lbfgsb.h"
-#include "include/cppoptlib/solver/newton_descent.h"
+#include "cppoptlib/function.h"
+#include "cppoptlib/solver/bfgs.h"
+#include "cppoptlib/solver/conjugated_gradient_descent.h"
+#include "cppoptlib/solver/gradient_descent.h"
+#include "cppoptlib/solver/lbfgs.h"
+#include "cppoptlib/solver/lbfgsb.h"
+#include "cppoptlib/solver/newton_descent.h"
 
 using FunctionXd = cppoptlib::function::Function<double>;
 

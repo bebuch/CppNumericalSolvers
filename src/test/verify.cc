@@ -7,12 +7,12 @@
 #include <list>
 
 #include "gtest/gtest.h"
-#include "include/cppoptlib/solver/bfgs.h"
-#include "include/cppoptlib/solver/conjugated_gradient_descent.h"
-#include "include/cppoptlib/solver/gradient_descent.h"
-#include "include/cppoptlib/solver/lbfgs.h"
-#include "include/cppoptlib/solver/lbfgsb.h"
-#include "include/cppoptlib/solver/newton_descent.h"
+#include "cppoptlib/solver/bfgs.h"
+#include "cppoptlib/solver/conjugated_gradient_descent.h"
+#include "cppoptlib/solver/gradient_descent.h"
+#include "cppoptlib/solver/lbfgs.h"
+#include "cppoptlib/solver/lbfgsb.h"
+#include "cppoptlib/solver/newton_descent.h"
 
 constexpr double PRECISION = 1e-4;
 constexpr auto FUNCTION_DIM = 2;
