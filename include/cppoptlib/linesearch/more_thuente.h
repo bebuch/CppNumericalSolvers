@@ -27,7 +27,7 @@ class MoreThuente {
 
   static scalar_t Search(const state_t &state, const vector_t &search_direction,
                          const Function &function,
-                         const scalar_t alpha_init = 1.0) {
+                         const scalar_t alpha_init = 1) {
     scalar_t alpha = alpha_init;
     vector_t g = state.gradient;
 

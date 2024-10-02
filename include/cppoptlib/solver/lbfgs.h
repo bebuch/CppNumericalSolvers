@@ -57,7 +57,7 @@ class Lbfgs : public Solver<function_t> {
                                     const state_t &state) override {
     vector_t search_direction = current.gradient;
 
-    constexpr scalar_t absolute_eps = 0.0001;
+    constexpr auto absolute_eps = scalar_t(0.0001);
     const scalar_t relative_eps =
         static_cast<scalar_t>(absolute_eps) *
         std::max<scalar_t>(scalar_t{1.0}, current.x.norm());
@@ -72,7 +72,7 @@ class Lbfgs : public Solver<function_t> {
     for (int i = k - 1; i >= 0; i--) {
       // alpha_i <- rho_i*s_i^T*q
       const scalar_t rho =
-          1.0 / x_diff_memory_.col(i).dot(grad_diff_memory_.col(i));
+          scalar_t(1.0) / x_diff_memory_.col(i).dot(grad_diff_memory_.col(i));
       alpha(i) = rho * x_diff_memory_.col(i).dot(search_direction);
       // q <- q - alpha_i*y_i
       search_direction -= alpha(i) * grad_diff_memory_.col(i);
@@ -84,7 +84,7 @@ class Lbfgs : public Solver<function_t> {
     for (int i = 0; i < k; i++) {
       // beta <- rho_i * y_i^T * r
       const scalar_t rho =
-          1.0 / x_diff_memory_.col(i).dot(grad_diff_memory_.col(i));
+          scalar_t(1.0) / x_diff_memory_.col(i).dot(grad_diff_memory_.col(i));
       const scalar_t beta =
           rho * grad_diff_memory_.col(i).dot(search_direction);
       // r <- r + s_i * ( alpha_i - beta)
@@ -95,11 +95,11 @@ class Lbfgs : public Solver<function_t> {
 
     // any issues with the descent direction ?
     scalar_t descent_direction = -current.gradient.dot(search_direction);
-    scalar_t alpha_init = 1.0 / current.gradient.norm();
+    scalar_t alpha_init = scalar_t(1.0) / current.gradient.norm();
     if (descent_direction > -absolute_eps * relative_eps) {
       search_direction = -current.gradient.eval();
       memory_idx_ = 0;
-      alpha_init = 1.0;
+      alpha_init = scalar_t(1.0);
     }
 
     const scalar_t rate = linesearch::MoreThuente<function_t, 1>::Search(

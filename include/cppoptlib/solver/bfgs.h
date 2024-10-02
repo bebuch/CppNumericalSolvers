@@ -58,13 +58,13 @@ class Bfgs : public Solver<function_t> {
     // Update inverse Hessian estimate.
     const vector_t s = rate * search_direction;
     const vector_t y = next.gradient - current.gradient;
-    const scalar_t rho = 1.0 / y.dot(s);
+    const scalar_t rho = scalar_t(1.0) / y.dot(s);
 
     inverse_hessian_ =
         inverse_hessian_ -
         rho * (s * (y.transpose() * inverse_hessian_) +
                (inverse_hessian_ * y) * s.transpose()) +
-        rho * (rho * y.dot(inverse_hessian_ * y) + 1.0) * (s * s.transpose());
+        rho * (rho * y.dot(inverse_hessian_ * y) + scalar_t(1.0)) * (s * s.transpose());
 
     return next;
   }

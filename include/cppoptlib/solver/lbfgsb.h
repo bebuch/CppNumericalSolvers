@@ -43,7 +43,7 @@ class Lbfgsb : public Solver<function_t> {
   void InitializeSolver(const function_state_t &initial_state) override {
     dim_ = initial_state.x.rows();
 
-    theta_ = 1.0;
+    theta_ = scalar_t(1.0);
 
     W_ = matrix_t::Zero(dim_, 0);
     M_ = matrix_t::Zero(0, 0);
@@ -84,7 +84,7 @@ class Lbfgsb : public Solver<function_t> {
 
     // STEP 6:
     const scalar_t test = fabs(new_s.dot(new_y));
-    if (test > 1e-7 * new_y.squaredNorm()) {
+    if (test > scalar_t(1e-7) * new_y.squaredNorm()) {
       if (y_history_.cols() < m) {
         y_history_.conservativeResize(dim_, y_history_.cols() + 1);
         s_history_.conservativeResize(dim_, s_history_.cols() + 1);
@@ -165,7 +165,7 @@ class Lbfgsb : public Solver<function_t> {
     // f'' :=   \theta_*d^scalar_t*d-d^scalar_t*W*M*W^scalar_t*d = -\theta_*f'
     // -
     // p^scalar_t*M*p
-    scalar_t f_doubleprime = (scalar_t)(-1.0 * theta_) * f_prime -
+    scalar_t f_doubleprime = (scalar_t(-1.0) * theta_) * f_prime -
                              p.dot(M_ * p);  // (O(m^2) operations)
     f_doubleprime = std::max<scalar_t>(epsilon, f_doubleprime);
     scalar_t f_dp_orig = f_doubleprime;

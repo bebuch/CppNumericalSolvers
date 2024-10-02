@@ -39,7 +39,7 @@ class NewtonDescent : public Solver<function_t, 2> {
   function_state_t OptimizationStep(const function_t &function,
                                     const function_state_t &current,
                                     const state_t & /*state*/) override {
-    constexpr scalar_t safe_guard = 1e-5;
+    constexpr auto safe_guard = scalar_t(1e-5);
     const hessian_t hessian =
         *(current.hessian) + safe_guard * hessian_t::Identity(dim_, dim_);
 

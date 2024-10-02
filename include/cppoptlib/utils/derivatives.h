@@ -20,7 +20,7 @@ void ComputeFiniteGradient(const function_t &function,
   using vector_t = typename function_t::vector_t;
   using index_t = typename function_t::index_t;
   // The 'accuracy' can be 0, 1, 2, 3.
-  constexpr scalar_t eps = 2.2204e-6;
+  constexpr auto eps = scalar_t(2.2204e-6);
   static const std::array<std::vector<scalar_t>, 4> coeff = {
       {{1, -1},
        {1, -8, 8, -1},
@@ -61,7 +61,7 @@ void ComputeFiniteHessian(const function_t &function,
   using vector_t = typename function_t::vector_t;
   using index_t = typename function_t::index_t;
 
-  constexpr scalar_t eps = std::numeric_limits<scalar_t>::epsilon() * 10e7;
+  constexpr scalar_t eps = std::numeric_limits<scalar_t>::epsilon() * scalar_t(10e7);
 
   hessian->resize(x0.rows(), x0.rows());
   vector_t &x = const_cast<vector_t &>(x0);
@@ -195,7 +195,7 @@ void ComputeFiniteHessian(const function_t &function,
 
         (*hessian)(i, j) =
             (-63 * term_1 + 63 * term_2 + 44 * term_3 + 74 * term_4) /
-            (600.0 * eps * eps);
+            (scalar_t(600.0) * eps * eps);
       }
     }
   }
@@ -205,7 +205,7 @@ template <class function_t>
 bool IsGradientCorrect(const function_t &function,
                        const typename function_t::vector_t &x0,
                        int accuracy = 3) {
-  constexpr float tolerance = 1e-2;
+  constexpr float tolerance = 1e-2f;
 
   using scalar_t = typename function_t::scalar_t;
   using vector_t = typename function_t::vector_t;
@@ -233,7 +233,7 @@ template <class function_t>
 bool IsHessianCorrect(const function_t &function,
                       const typename function_t::vector_t &x0,
                       int accuracy = 3) {
-  constexpr float tolerance = 1e-1;
+  constexpr float tolerance = 1e-1f;
 
   using scalar_t = typename function_t::scalar_t;
   using hessian_t = typename function_t::hessian_t;

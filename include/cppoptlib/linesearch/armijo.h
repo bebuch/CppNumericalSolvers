@@ -20,9 +20,9 @@ class Armijo {
    */
   static scalar_t Search(const state_t &state, const vector_t &search_direction,
                          const function_t &function,
-                         const scalar_t alpha_init = 1.0) {
-    constexpr scalar_t c = 0.2;
-    constexpr scalar_t rho = 0.9;
+                         const scalar_t alpha_init = 1) {
+    constexpr auto c = scalar_t(0.2);
+    constexpr auto rho = scalar_t(0.9);
     scalar_t alpha = alpha_init;
     scalar_t f = function(state.x + alpha * search_direction);
     const scalar_t f_in = state.value;
@@ -55,13 +55,13 @@ class Armijo<function_t, 2> {
    */
   static scalar_t Search(const state_t &state, const vector_t &search_direction,
                          const function_t &function) {
-    constexpr scalar_t c = 0.2;
-    constexpr scalar_t rho = 0.9;
-    scalar_t alpha = 1.0;
+    constexpr auto c = scalar_t(0.2);
+    constexpr auto rho = (0.9);
+    auto alpha = scalar_t(1.0);
     scalar_t f = function(state.x + alpha * search_direction);
     const scalar_t f_in = state.value;
     const scalar_t cache = c * state.gradient.dot(search_direction) +
-                           0.5 * c * c * search_direction.transpose() *
+                           scalar_t(0.5) * c * c * search_direction.transpose() *
                                ((*state.hessian) * search_direction);
 
     while (f > f_in + alpha * cache) {
