@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(cppoptlib VERSION 1.0.3 LANGUAGES CXX)
+project(cppoptlib VERSION 1.0.4 LANGUAGES CXX)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -49,6 +49,8 @@ install(TARGETS cppoptlib EXPORT cppoptlibTargets)
 
 # Create the cppoptlibConfig.cmake file content
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/cppoptlibConfig.cmake"
+    "include(CMakeFindDependencyMacro)\n\n"
+    "find_dependency(Eigen3 REQUIRED)\n\n"
     "include(\"\${CMAKE_CURRENT_LIST_DIR}/cppoptlibTargets.cmake\")\n"
 )
 
