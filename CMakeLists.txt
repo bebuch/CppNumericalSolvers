@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(cppoptlib VERSION 1.0.2 LANGUAGES CXX)
+project(cppoptlib VERSION 1.0.3 LANGUAGES CXX)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -45,10 +45,7 @@ if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR cppoptlib_BUILD_TESTING) AND BUI
 endif()
 
 # Export the target
-install(TARGETS cppoptlib
-    EXPORT cppoptlibTargets
-    INCLUDES DESTINATION include
-)
+install(TARGETS cppoptlib EXPORT cppoptlibTargets)
 
 # Create the cppoptlibConfig.cmake file content
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/cppoptlibConfig.cmake"
